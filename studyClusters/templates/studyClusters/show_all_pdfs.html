@@ -1,0 +1,45 @@
+{% extends "studyClusters/base.html" %}
+{% load static %}
+{% block content %}
+
+<section>
+    
+    <div class="container">
+        <div class="row">
+            <form id="pdfNameSelector" method="POST">
+                {% csrf_token %}
+                <table>
+                    {% for file in list %}
+                        <tr>
+                            <td>
+                                <label>{{ file }}</label>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+
+                <input id="pdfName" name="pdf" hidden>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        // $("#file").click(function(){
+        //     console.log($("#file").val());
+        // });
+
+        $(document).ready(function () {
+            $(document).click(function(event) {
+                var text = $(event.target).text();
+                console.log(text);
+                $("#pdfName").val(text);
+                $("#pdfNameSelector").submit();
+            });
+        });
+
+    </script>
+
+</section>
+
+{% endblock content%}
